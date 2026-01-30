@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUX Conscious Cleaning Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-deep: #2c5f4b;
+      --green-mid: #3a7d5e;
+      --green-light: #5fa882;
+      --green-pale: #e8f5ee;
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --slate: #4a5568;
+      --slate-light: #718096;
+      --cream: #fdfaf5;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--slate);
+      background: var(--cream);
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--green-deep);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(253,250,245,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-md); }
+    .nav-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--green-deep);
+      text-decoration: none;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .logo-icon { width: 38px; height: 38px; fill: var(--green-mid); }
+    .logo small {
+      display: block; font-size: .65rem; font-weight: 400;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--green-light);
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .85rem; font-weight: 500;
+      color: var(--slate); letter-spacing: .02em; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--green-mid); }
+    .nav-links .btn-nav {
+      background: var(--green-deep); color: var(--white);
+      padding: .55rem 1.3rem; border-radius: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .nav-links .btn-nav:hover { background: var(--green-mid); transform: translateY(-1px); }
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative;
+    }
+    .hamburger span {
+      display: block; position: absolute; left: 0; width: 100%; height: 2px;
+      background: var(--green-deep); border-radius: 2px; transition: .3s;
+    }
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .hamburger span:nth-child(3) { bottom: 0; }
+    .hamburger.open span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--green-pale) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      top: -30%; right: -10%; width: 60%; height: 160%;
+      background: url('images/image_4.jpg') center/cover;
+      border-radius: 0 0 0 40%;
+      opacity: .12;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 700; font-style: italic; margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--green-light); }
+    .hero p {
+      font-size: 1.15rem; color: var(--slate-light);
+      max-width: 480px; margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--gold); color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: .95rem;
+      padding: 1rem 2.2rem; border-radius: 8px; border: none;
+      text-decoration: none; letter-spacing: .04em; text-transform: uppercase;
+      cursor: pointer; transition: all .25s;
+      box-shadow: 0 4px 16px rgba(201,168,76,.3);
+    }
+    .btn-primary:hover {
+      background: #b8963d; transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(201,168,76,.4);
+    }
+    .hero-image {
+      position: relative; border-radius: var(--radius-lg);
+      overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .hero-image img { width: 100%; height: 500px; object-fit: cover; display: block; }
+    .hero-badge {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,.95); backdrop-filter: blur(8px);
+      padding: .75rem 1.25rem; border-radius: 10px;
+      font-size: .8rem; font-weight: 500; color: var(--green-deep);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 2rem; }
+    .section-header { text-align: center; max-width: 680px; margin: 0 auto 4rem; }
+    .section-header .eyebrow {
+      font-size: .75rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .75rem;
+    }
+    .section-header h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .section-header p { color: var(--slate-light); font-size: 1.05rem; }
+
+    /* SERVICES */
+    .services { background: var(--white); }
+    .services-grid {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .service-card {
+      background: var(--cream); border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem; position: relative; overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      border: 1px solid rgba(0,0,0,.04);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, var(--green-light), var(--gold));
+      border-radius: 4px 4px 0 0;
+      transform: scaleX(0); transform-origin: left; transition: transform .4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--green-pale); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .service-icon svg { width: 26px; height: 26px; stroke: var(--green-mid); fill: none; stroke-width: 1.5; }
+    .service-card h3 { font-size: 1.35rem; margin-bottom: .75rem; }
+    .service-card p { font-size: .92rem; color: var(--slate-light); line-height: 1.65; }
+    .service-tag {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--green-light);
+      padding: .35rem .8rem; background: rgba(95,168,130,.1); border-radius: 6px;
+    }
+
+    /* APPROACH */
+    .approach { background: linear-gradient(180deg, var(--green-pale) 0%, var(--cream) 100%); }
+    .approach-grid {
+      max-width: 1100px; margin: auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+    }
+    .approach-card {
+      text-align: center; padding: 2.5rem 1.5rem;
+      border-radius: var(--radius-lg); background: var(--white);
+      box-shadow: var(--shadow-sm); transition: box-shadow .3s;
+    }
+    .approach-card:hover { box-shadow: var(--shadow-md); }
+    .approach-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--green-deep); color: var(--white);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .approach-card h3 { font-size: 1.2rem; margin-bottom: .75rem; }
+    .approach-card p { font-size: .9rem; color: var(--slate-light); }
+
+    /* QUOTE BANNER */
+    .quote-banner {
+      background: var(--green-deep); color: var(--white);
+      text-align: center; padding: 5rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .quote-banner::before {
+      content: '\201C'; position: absolute;
+      top: -1rem; left: 50%; transform: translateX(-50%);
+      font-size: 14rem; font-family: 'Cormorant Garamond', serif;
+      color: rgba(255,255,255,.06); line-height: 1;
+    }
+    .quote-banner blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-style: italic; font-weight: 400;
+      max-width: 700px; margin: auto; position: relative; z-index: 1;
+    }
+    .quote-banner cite {
+      display: block; margin-top: 1.5rem;
+      font-family: 'Inter', sans-serif; font-style: normal;
+      font-size: .85rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    /* ABOUT */
+    .about { background: var(--white); }
+    .about-inner {
+      max-width: 1100px; margin: auto;
+      display: grid; grid-template-columns: 380px 1fr; gap: 4rem;
+      align-items: start;
+    }
+    .about-photo {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-photo img { width: 100%; display: block; }
+    .about-photo::after {
+      content: ''; position: absolute; inset: 0;
+      border: 3px solid var(--gold); border-radius: var(--radius-lg);
+      pointer-events: none; opacity: .3;
+    }
+    .about-content .eyebrow {
+      font-size: .75rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .5rem;
+    }
+    .about-content h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: .5rem; }
+    .about-content .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--green-light); margin-bottom: 1.5rem;
+    }
+    .about-content p { margin-bottom: 1.2rem; font-size: .95rem; color: var(--slate-light); }
+    .about-content p strong { color: var(--slate); font-weight: 500; }
+    .about-stats {
+      display: flex; gap: 2rem; margin-top: 2rem;
+      padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.08);
+    }
+    .about-stat { text-align: center; }
+    .about-stat .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700; color: var(--green-deep);
+    }
+    .about-stat .label { font-size: .75rem; color: var(--slate-light); letter-spacing: .05em; }
+
+    /* PRICING */
+    .pricing { background: var(--cream); }
+    .pricing-grid {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+    }
+    .pricing-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 2.5rem; border: 1px solid rgba(0,0,0,.06);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .pricing-card h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+    .pricing-card .desc { font-size: .88rem; color: var(--slate-light); margin-bottom: 1.5rem; }
+    .pricing-factors { list-style: none; }
+    .pricing-factors li {
+      padding: .5rem 0; font-size: .88rem; color: var(--slate);
+      border-bottom: 1px solid rgba(0,0,0,.04);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .pricing-factors li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green-light); flex-shrink: 0;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+      color: var(--white); text-align: center; padding: 5rem 2rem;
+    }
+    .cta h2 { color: var(--white); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .cta p { font-size: 1.1rem; opacity: .85; max-width: 500px; margin: 0 auto 2.5rem; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--white); color: var(--green-deep);
+      font-weight: 600; font-size: .95rem; font-family: 'Inter', sans-serif;
+      padding: 1rem 2.2rem; border-radius: 8px; border: none;
+      text-decoration: none; letter-spacing: .04em; text-transform: uppercase;
+      cursor: pointer; transition: all .25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,0,0,.2); }
+
+    /* FOOTER */
+    footer {
+      background: #1a3329; color: rgba(255,255,255,.6);
+      padding: 3rem 2rem; text-align: center; font-size: .85rem;
+    }
+    footer a { color: var(--gold-light); text-decoration: none; }
+    footer .socials { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
+    footer .socials a { opacity: .7; transition: opacity .2s; }
+    footer .socials a:hover { opacity: 1; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-image { max-width: 550px; margin: auto; }
+      .hero::after { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-photo { max-width: 340px; margin: 0 auto; }
+      .about-content { text-align: center; }
+      .about-stats { justify-content: center; }
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(253,250,245,.98); backdrop-filter: blur(16px);
+        padding: 1rem; box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: .75rem 1rem; display: block; border-radius: 8px; }
+      .nav-links a:hover { background: var(--green-pale); }
+      .hamburger { display: block; }
+      .services-grid, .approach-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.25rem; }
+      .hero { padding: 7rem 1.25rem 3rem; min-height: auto; }
+      .hero-image img { height: 350px; }
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s, transform .7s;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+    .reveal-delay-5 { transition-delay: .5s; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg class="logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 8c-4 8-16 14-16 26a16 16 0 0032 0C48 22 36 16 32 8z" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="2"/>
+        <path d="M32 20c-2 5-8 9-8 16a8 8 0 0016 0c0-7-6-11-8-16z" fill="currentColor" opacity=".3"/>
+        <circle cx="32" cy="34" r="3" fill="currentColor"/>
+        <path d="M32 4l-2 3 2-1 2 1z" fill="currentColor"/>
+      </svg>
+      <div>Lux Conscious<small>Cleaning Services</small></div>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="https://calendly.com/luxconsciouscleaningservices" target="_blank" class="btn-nav">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="reveal">Conscious Cleaning.<br><span>Healthier Living.</span></h1>
+      <p class="reveal reveal-delay-1">We blend eco-friendly practices with a medical perspective &mdash; transforming your home into a true space of healing and health.</p>
+      <a href="https://calendly.com/luxconsciouscleaningservices" target="_blank" class="btn-primary reveal reveal-delay-2">
+        Book a Discovery Call
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-image reveal reveal-delay-2">
+      <img src="images/image_4.jpg" alt="Sparkling clean kitchen" loading="eager">
+      <div class="hero-badge">Austin, TX &middot; Serving Greater Austin</div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-header">
+    <p class="eyebrow reveal">What We Offer</p>
+    <h2 class="reveal reveal-delay-1">Our Services</h2>
+    <p class="reveal reveal-delay-2">Every home is a living ecosystem. Our services are custom-built to match your space, health needs, and goals.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>Standard Cleaning</h3>
+      <p>Sanitized flooring, kitchen exterior surfaces, dusting, bathroom disinfection, and thoughtful zoning throughout your home.</p>
+      <span class="service-tag">Recurring Care</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+      </div>
+      <h3>Deep Cleaning</h3>
+      <p>Everything in Standard, plus baseboards, kitchen degreasing, and intermediate zoning for heavier buildup and neglected areas.</p>
+      <span class="service-tag">Full Reset</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
+      </div>
+      <h3>Move-Out Cleaning</h3>
+      <p>Deep Clean plus interiors of cabinets, drawers, closets. Light trash removal and complete empty-property sanitation.</p>
+      <span class="service-tag">Transition Ready</span>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </div>
+      <h3>Interior Detailing</h3>
+      <p>&Agrave; la carte detailing: ovens, ranges, microwaves, dishwashers, coffee makers, interior cabinets, and organizing projects.</p>
+      <span class="service-tag">&Agrave; La Carte</span>
+    </div>
+    <div class="service-card reveal reveal-delay-4">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Luxury Event Support</h3>
+      <p>White-glove concierge service. We coordinate real-time cleanup during your event and comprehensive post-event restoration.</p>
+      <span class="service-tag">Concierge</span>
+    </div>
+    <div class="service-card reveal reveal-delay-5">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3>Pet-Friendly Protocol</h3>
+      <p>Safe, non-toxic products and dedicated equipment. We never cross-contaminate between pet-free and pet-friendly homes.</p>
+      <span class="service-tag">Fur-Family Safe</span>
+    </div>
+  </div>
+</section>
+
+<div class="quote-banner">
+  <blockquote class="reveal">
+    &ldquo;Clean should smell like nothing. It should feel safe, calm, and good.&rdquo;
+    <cite>&mdash; Melissa Jane, Founder</cite>
+  </blockquote>
+</div>
+
+<section class="approach" id="approach">
+  <div class="section-header">
+    <p class="eyebrow reveal">How We Work</p>
+    <h2 class="reveal reveal-delay-1">Our Approach</h2>
+    <p class="reveal reveal-delay-2">Three pillars that set Lux Conscious apart from conventional cleaning services.</p>
+  </div>
+  <div class="approach-grid">
+    <div class="approach-card reveal">
+      <div class="approach-num">1</div>
+      <h3>Conscious Ingredients</h3>
+      <p>We source fragrance-free, non-toxic products from Australia, Europe, and Canada &mdash; where ingredient transparency and environmental safety regulations exceed U.S. standards.</p>
+    </div>
+    <div class="approach-card reveal reveal-delay-1">
+      <div class="approach-num">2</div>
+      <h3>High-End Equipment</h3>
+      <p>Premium tools formed from allergy protocols. HEPA vacuums, VOC-free tools, and dedicated air purifiers. Separate equipment fleets prevent cross-contamination.</p>
+    </div>
+    <div class="approach-card reveal reveal-delay-2">
+      <div class="approach-num">3</div>
+      <h3>Energetic Integrity</h3>
+      <p>Every space is treated as a living ecosystem. Cleaning is done with intention, respect, and mindful attention to create an environment where health can flourish.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo reveal">
+      <img src="images/image_1.jpg" alt="Melissa Jane, Founder">
+    </div>
+    <div class="about-content">
+      <p class="eyebrow reveal">Meet the Founder</p>
+      <h2 class="reveal reveal-delay-1">Melissa Jane</h2>
+      <p class="subtitle reveal reveal-delay-1">Founder &amp; Environmental Health Cleaning Consultant</p>
+      <p class="reveal reveal-delay-2">This business didn't begin in wellness &mdash; it began in survival. Melissa was diagnosed with Dysautonomia and Mast Cell Activation Syndrome (MCAS), spending years navigating chronic inflammation and systemic chaos as a professional patient.</p>
+      <p class="reveal reveal-delay-3">It wasn't until she radically transformed the environments she lived in that her nervous system began to regulate and true healing could finally begin. Her journey revealed a truth most people overlook: <strong>the body doesn't heal in isolation &mdash; it heals in relationship to its environment.</strong></p>
+      <p class="reveal reveal-delay-4">Now she helps families design healthier home ecosystems rooted in nervous-system safety and environmental awareness.</p>
+      <div class="about-stats reveal reveal-delay-5">
+        <div class="about-stat"><div class="num">1,000+</div><div class="label">Homes Cleaned</div></div>
+        <div class="about-stat"><div class="num">116</div><div class="label">Specialists Consulted</div></div>
+        <div class="about-stat"><div class="num">3</div><div class="label">Years Experience</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="section-header">
+    <p class="eyebrow reveal">Custom-Built Pricing</p>
+    <h2 class="reveal reveal-delay-1">Request a Quote</h2>
+    <p class="reveal reveal-delay-2">No two spaces, health needs, or goals are the same. We provide accurate quotes after reviewing your home, goals, and health considerations.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <h3>Standard &amp; Deep Cleaning</h3>
+      <p class="desc">Ongoing care or full home resets, depending on buildup, layout, and environmental needs.</p>
+      <ul class="pricing-factors">
+        <li>Home size &amp; layout</li>
+        <li>Level of buildup</li>
+        <li>Pets &amp; occupants</li>
+        <li>Health sensitivities</li>
+        <li>Frequency of service</li>
+      </ul>
+    </div>
+    <div class="pricing-card reveal reveal-delay-1">
+      <h3>Full-Home Cleaning Teams</h3>
+      <p class="desc">Larger homes, estates, and intensive projects requiring multiple staff and coordinated execution.</p>
+      <ul class="pricing-factors">
+        <li>Square footage</li>
+        <li>Number of staff required</li>
+        <li>Scope &amp; duration</li>
+        <li>Specialized protocols</li>
+      </ul>
+    </div>
+    <div class="pricing-card reveal reveal-delay-2">
+      <h3>Organizing &amp; Interior Detailing</h3>
+      <p class="desc">Project-based support tailored to complexity, volume, and desired outcome.</p>
+      <ul class="pricing-factors">
+        <li>Project goals</li>
+        <li>Volume &amp; density</li>
+        <li>Decision-making support</li>
+        <li>Time &amp; systems required</li>
+      </ul>
+    </div>
+    <div class="pricing-card reveal reveal-delay-3">
+      <h3>Luxury Event Support</h3>
+      <p class="desc">White-glove event cleaning concierge with pre, during, and post-event coverage.</p>
+      <ul class="pricing-factors">
+        <li>Guest count</li>
+        <li>Venue size &amp; complexity</li>
+        <li>Duration of event</li>
+        <li>Post-event restoration scope</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="reveal">Your Home Should Support Your Health</h2>
+  <p class="reveal reveal-delay-1">Let's talk about building a cleaner, safer space for you and your family.</p>
+  <a href="https://calendly.com/luxconsciouscleaningservices" target="_blank" class="btn-white reveal reveal-delay-2">
+    Book a Discovery Call
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<footer>
+  <div class="socials">
+    <a href="https://www.instagram.com/luxconsciouscleaningservices/" target="_blank" aria-label="Instagram">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/melissabakermarketing/" target="_blank" aria-label="LinkedIn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M8 11v5M8 8v.01M12 16v-5c0-1 1-2 2-2s2 1 2 2v5"/></svg>
+    </a>
+    <a href="https://www.yelp.com/biz/lux-conscious-cleaning-austin-5" target="_blank" aria-label="Yelp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    </a>
+  </div>
+  <p>&copy; 2025 LUX Conscious Cleaning Services &middot; Austin, TX</p>
+  <p style="margin-top:.5rem"><a href="https://linktr.ee/LuxConsciousCleaningServices" target="_blank">Linktree</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSdSaeefYJnHm86xlbMAMOrmkX0YPMxV7rrg4cHSL_Vv6xI8sg/viewform" target="_blank">Request a Quote</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); });
+  });
+</script>
+</body>
+</html>

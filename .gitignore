@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+rendered.html
+scrape.js
+package.json
+preview-desktop.png
+preview-mobile.png
